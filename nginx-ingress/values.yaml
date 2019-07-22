@@ -1,0 +1,41 @@
+# ref: https://github.com/kubernetes/charts/blob/master/stable/nginx-ingress/values.yaml
+
+rbac:
+  create: true
+
+livenessProbe:
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+
+defaultBackend:
+  replicaCount: 1
+
+  resources:
+    limits:
+      cpu: 0.1
+      memory: "20Mi"
+    requests:
+      cpu: 0.1
+      memory: "5Mi"
+
+controller:
+  replicaCount: 1
+
+  # https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+  publishService:
+    enabled: true
+
+  resources:
+    limits:
+      memory: "256Mi"
+    requests:
+      cpu: 200m
+      memory: "128Mi"
+
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "10254"
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+
