@@ -39,3 +39,7 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
       service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
 
+  config:
+    use-proxy-protocol: "true"
+    enable-vts-status: "true"
+    ssl-redirect: "true"
